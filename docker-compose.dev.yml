@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  # PostgreSQL database - no health check
+  postgres:
+    image: postgres:14-alpine
+    container_name: skybound-postgres-dev
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=skybound_realms_dev
+      - POSTGRES_USER=skybound_dev
+      - POSTGRES_PASSWORD=dev_password_123
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+
+  # Redis cache - no health check
+  redis:
+    image: redis:7-alpine
+    container_name: skybound-redis-dev
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_dev_data:/data
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local

@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./dist",
+    "paths": {
+      "@models/*": ["models/*"],
+      "@services/*": ["services/*"],
+      "@shared/*": ["shared/*"]
+    }
+  }
+}
